@@ -302,6 +302,8 @@ export const usarTiendaAhorro = defineStore('ahorro', {
         this.usuario = null
         this.metas = []
         this.metaActual = null
+        this.vacas = []
+        this.vacaActual = null
       }
     },
 
@@ -504,7 +506,14 @@ export const usarTiendaAhorro = defineStore('ahorro', {
       receptorPagoUsuarioId?: number | null
       datosPagoMovil?: string
       rubros: Array<{ concepto: string; monto: number; icono: string }>
-      participantes: Array<{ nombreParticipante: string; colorAvatar?: string; usuarioId?: number; esReceptorPago?: boolean }>
+      participantes: Array<{
+        nombreParticipante: string
+        nombreUsuario?: string | null
+        correo?: string | null
+        colorAvatar?: string
+        usuarioId?: number
+        esReceptorPago?: boolean
+      }>
     }) {
       this.estaCargando = true
       try {

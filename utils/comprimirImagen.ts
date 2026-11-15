@@ -22,8 +22,6 @@ export function comprimirImagen(archivo: File, calidad: number = 0.75, dimension
             ancho = dimensionMaxima
           } else {
             ancho = Math.round((ancho * dimensionMaxima) / alto)
-            dimensionMaxima
-            ancho = Math.round((ancho * dimensionMaxima) / img.height)
             alto = dimensionMaxima
           }
         }

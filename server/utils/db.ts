@@ -15,8 +15,12 @@ export function obtenerBD(): Sequelize {
 
   if (urlBaseDatos && urlBaseDatos.startsWith('postgres')) {
     const esRemota = !urlBaseDatos.includes('localhost') && !urlBaseDatos.includes('127.0.0.1')
-    
-    instanciaSequelize = new Sequelize(urlBaseDatos, {
+    const urlLimpia = urlBaseDatos
+      .replace(/[?&]channel_binding=require/g, '')
+      .replace(/\?&/, '?')
+      .replace(/\?$/, '')
+
+    instanciaSequelize = new Sequelize(urlLimpia, {
       dialect: 'postgres',
       logging: false,
       dialectOptions: esRemota

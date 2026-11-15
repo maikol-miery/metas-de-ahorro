@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, watch } from 'vue'
 import { usarTiendaAhorro } from '~/stores/usarTiendaAhorro'
 
 const tienda = usarTiendaAhorro()
@@ -10,14 +10,18 @@ const moduloActivo = ref<'metas' | 'vacas'>('metas')
 const mostrarModalCrearMeta = ref(false)
 const mostrarModalCrearVaca = ref(false)
 
-onMounted(async () => {
-  if (tienda.usuario) {
-    await Promise.all([
-      tienda.cargarMetas(),
-      tienda.cargarVacas()
-    ])
-  }
-})
+watch(
+  () => tienda.usuario?.id,
+  async (usuarioId) => {
+    if (usuarioId) {
+      await Promise.all([
+        tienda.cargarMetas(),
+        tienda.cargarVacas()
+      ])
+    }
+  },
+  { immediate: true }
+)
 
 function alCrearMeta(id: number) {
   mostrarModalCrearMeta.value = false

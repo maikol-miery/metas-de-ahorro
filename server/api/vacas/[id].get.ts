@@ -68,6 +68,18 @@ export default defineEventHandler(async (event) => {
   const esCreador = json.creadorId === sesion.id
   const esReceptor = json.receptorPagoUsuarioId === sesion.id ||
     json.receptorPagoNombre.trim().toLowerCase() === sesion.nombre.trim().toLowerCase()
+  const esParticipante = participantes.some((p: any) =>
+    p.usuarioId === sesion.id ||
+    (p.correo && sesion.correo && p.correo.toLowerCase() === sesion.correo.toLowerCase()) ||
+    (p.nombreUsuario && sesion.nombreUsuario && p.nombreUsuario.toLowerCase() === sesion.nombreUsuario.toLowerCase())
+  )
+
+  if (!esCreador && !esReceptor && !esParticipante) {
+    throw createError({
+      statusCode: 403,
+      statusMessage: 'No tienes permiso para acceder a esta Vaca'
+    })
+  }
 
   // 1. Cálculos de dinero
   const casillasVerificadas = casillas.filter((c: any) => c.estaPagada && c.estadoVerificacion === 'verificado')

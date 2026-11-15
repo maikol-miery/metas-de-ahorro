@@ -51,7 +51,16 @@ export default defineEventHandler(async (event) => {
   try {
     await MiembroMeta.update(
       { usuarioId: nuevoUsuario.id },
-      { where: { correoInvitado: correoLimpio, usuarioId: null } }
+      {
+        where: {
+          usuarioId: null,
+          [Op.or]: [
+            { correoInvitado: correoLimpio },
+            { nombreInvitado: usuarioLimpio },
+            { nombreInvitado: `@${usuarioLimpio}` }
+          ]
+        }
+      }
     )
 
     await ParticipanteVaca.update(

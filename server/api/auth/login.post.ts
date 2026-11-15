@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs'
 import { Op } from 'sequelize'
-import { Usuario } from '../../models'
+import { Usuario, MiembroMeta, ParticipanteVaca } from '../../models'
 import { esquemaLogin } from '../../utils/esquemasZod'
 import { generarToken, establecerCookieToken } from '../../utils/jwt'
 
@@ -41,6 +41,27 @@ export default defineEventHandler(async (event) => {
       statusMessage: 'Credenciales incorrectas. Verifica tu usuario/correo y contraseña.'
     })
   }
+
+  // Vincular participaciones pendientes por correo o nombre de usuario si existieran
+  try {
+    const condicionesMeta: any[] = [{ correoInvitado: usuario.correo.toLowerCase() }]
+    const condicionesVaca: any[] = [{ correo: usuario.correo.toLowerCase() }]
+
+    if (usuario.nombreUsuario) {
+      const uLimpio = usuario.nombreUsuario.toLowerCase()
+      condicionesMeta.push({ nombreInvitado: uLimpio }, { nombreInvitado: `@${uLimpio}` })
+      condicionesVaca.push({ nombreUsuario: uLimpio })
+    }
+
+    await MiembroMeta.update(
+      { usuarioId: usuario.id },
+      { where: { usuarioId: null, [Op.or]: condicionesMeta } }
+    )
+    await ParticipanteVaca.update(
+      { usuarioId: usuario.id },
+      { where: { usuarioId: null, [Op.or]: condicionesVaca } }
+    )
+  } catch {}
 
   const token = generarToken({
     id: usuario.id,

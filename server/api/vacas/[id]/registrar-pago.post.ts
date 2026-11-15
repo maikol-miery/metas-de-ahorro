@@ -1,4 +1,4 @@
-import { EventoVaca, CasillaVaca } from '../../../models'
+import { EventoVaca, CasillaVaca, ParticipanteVaca } from '../../../models'
 import { esquemaPagarCasillasVaca } from '../../../utils/esquemasZod'
 
 export default defineEventHandler(async (event) => {
@@ -23,7 +23,9 @@ export default defineEventHandler(async (event) => {
 
   const { casillasIds, metodoPago, comprobanteUrl, referenciaPago, notaPago } = validacion.data
 
-  const vaca = await EventoVaca.findByPk(vacaId)
+  const vaca = await EventoVaca.findByPk(vacaId, {
+    include: [{ model: ParticipanteVaca, as: 'participantes' }]
+  })
   if (!vaca) {
     throw createError({
       statusCode: 404,
@@ -31,9 +33,22 @@ export default defineEventHandler(async (event) => {
     })
   }
 
+  const participantes = (vaca.toJSON() as any).participantes || []
   const esCreador = vaca.creadorId === sesion.id
   const esReceptor = vaca.receptorPagoUsuarioId === sesion.id ||
     vaca.receptorPagoNombre.trim().toLowerCase() === sesion.nombre.trim().toLowerCase()
+  const esParticipante = participantes.some((p: any) =>
+    p.usuarioId === sesion.id ||
+    (p.correo && sesion.correo && p.correo.toLowerCase() === sesion.correo.toLowerCase()) ||
+    (p.nombreUsuario && sesion.nombreUsuario && p.nombreUsuario.toLowerCase() === sesion.nombreUsuario.toLowerCase())
+  )
+
+  if (!esCreador && !esReceptor && !esParticipante) {
+    throw createError({
+      statusCode: 403,
+      statusMessage: 'No tienes permiso para registrar pagos en esta Vaca'
+    })
+  }
 
   // Si lo registra el propio receptor o creador de la vaca, pasa directo a verificado.
   // Si lo sube otro participante, queda en 'en_revision' para auditoría.
