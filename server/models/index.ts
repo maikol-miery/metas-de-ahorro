@@ -1,6 +1,8 @@
 import { DataTypes, Model } from 'sequelize'
 import { obtenerBD, sincronizarBD } from '../utils/db'
 
+export { sincronizarBD }
+
 const bd = obtenerBD()
 
 // 1. Modelo Usuario
