@@ -42,7 +42,7 @@ function alCrearVaca(id: number) {
         <LogoMatcha tamano="xl" variante="verde" class="shadow-md animate-bounce" />
       </div>
       <h1 class="text-3xl font-black text-gray-900 dark:text-white">
-        Ahorra con disciplina, juega como en Duolingo
+        Ahorra con disciplina
       </h1>
       <p class="text-sm font-bold text-gray-500 dark:text-duo-oscuro-muted mt-2">
         Convierte metas personales y eventos con amigos (La Vaca) en tableros de cuadritos auditables.

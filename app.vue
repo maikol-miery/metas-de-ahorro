@@ -28,7 +28,7 @@ useHead({
       <NuxtPage />
     </main>
     <footer class="py-6 text-center text-xs font-bold text-gray-400 dark:text-gray-600 border-t border-duo-claro-borde dark:border-duo-oscuro-borde">
-      Metas de Ahorro Gamificadas ($ USD) · Inspirado en la psicología y diseño de Duolingo
+      DEVELOPMENT BY: ING. MAIKOL MIERY
     </footer>
   </div>
 </template>
