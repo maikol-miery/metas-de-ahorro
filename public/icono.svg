@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <filter id="sombra3d" x="0" y="0" width="100%" height="100%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="16" stdDeviation="0" flood-color="#6F881E"/>
+    </filter>
+  </defs>
+  <!-- Base Redondeada estilo Duolingo Chunky -->
+  <rect x="32" y="32" width="448" height="420" rx="96" fill="#90AD2E"/>
+  <rect x="32" y="420" width="448" height="60" rx="30" fill="#6F881E"/>
+  
+  <!-- Cuadro interior color Dark Green -->
+  <rect x="64" y="64" width="384" height="356" rx="72" fill="#123F1B"/>
+
+  <!-- Logo [m] estilo Matcha Work Cafe -->
+  <text x="256" y="275" font-size="180" font-weight="900" text-anchor="middle" dominant-baseline="middle" fill="#90AD2E" font-family="ui-monospace, monospace, 'Courier New'">[m]</text>
+
+  <!-- Pequeño detalle de moneda USD en la esquina -->
+  <circle cx="395" cy="115" r="48" fill="#BDD3A7" stroke="#123F1B" stroke-width="6"/>
+  <text x="395" y="127" font-size="52" font-weight="900" text-anchor="middle" dominant-baseline="middle" fill="#123F1B" font-family="sans-serif">$</text>
+</svg>

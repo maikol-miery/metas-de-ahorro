@@ -1,0 +1,30 @@
+# Dependencias
+node_modules
+.pnp
+.pnp.js
+
+# Build y Nuxt
+.nuxt
+.output
+dist
+
+# Base de datos local SQLite y backups
+*.sqlite
+*.sqlite3
+*.db
+datos_metas.sqlite
+
+# Variables de entorno
+.env
+.env.*
+!.env.example
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Sistema
+.DS_Store
+Thumbs.db

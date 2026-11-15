@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Nunito', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Clases de utilidad para el diseño 3D Chunky con la nueva paleta Matcha */
+.boton-duo-verde {
+  @apply bg-matcha-verde text-white font-extrabold border-2 border-matcha-verde-sombra border-b-4 rounded-2xl transition-all duration-75 active:border-b-2 active:translate-y-1 hover:brightness-105 shadow-sm;
+}
+
+.boton-duo-menta {
+  @apply bg-matcha-menta text-matcha-oscuro font-extrabold border-2 border-matcha-menta-sombra border-b-4 rounded-2xl transition-all duration-75 active:border-b-2 active:translate-y-1 hover:brightness-105 shadow-sm;
+}
+
+.boton-duo-azul {
+  @apply bg-duo-azul text-white font-extrabold border-2 border-duo-azul-sombra border-b-4 rounded-2xl transition-all duration-75 active:border-b-2 active:translate-y-1 hover:brightness-105 shadow-sm;
+}
+
+.boton-duo-amarillo {
+  @apply bg-duo-amarillo text-gray-900 font-extrabold border-2 border-duo-amarillo-sombra border-b-4 rounded-2xl transition-all duration-75 active:border-b-2 active:translate-y-1 hover:brightness-105 shadow-sm;
+}
+
+.boton-duo-blanco {
+  @apply bg-white dark:bg-duo-oscuro-tarjeta text-duo-claro-texto dark:text-duo-oscuro-texto font-extrabold border-2 border-duo-claro-borde dark:border-duo-oscuro-borde border-b-4 rounded-2xl transition-all duration-75 active:border-b-2 active:translate-y-1 hover:bg-matcha-crema/40 dark:hover:bg-opacity-80;
+}
+
+.tarjeta-duo {
+  @apply bg-white dark:bg-duo-oscuro-tarjeta border-2 border-duo-claro-borde dark:border-duo-oscuro-borde border-b-4 rounded-2xl shadow-sm transition-all;
+}
+
+/* Efecto jugoso de cápsula en barra de progreso */
+.barra-jugosa {
+  @apply relative overflow-hidden rounded-full shadow-inner bg-matcha-crema dark:bg-[#0c2411];
+}
+
+.barra-jugosa-relleno {
+  @apply relative h-full rounded-full transition-all duration-500 ease-out;
+}
+
+.barra-jugosa-relleno::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 6px;
+  right: 6px;
+  height: 35%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.05));
+  border-radius: 9999px;
+}
